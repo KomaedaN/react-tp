@@ -1,5 +1,8 @@
-import { Text, View, StyleSheet } from "react-native";
+import { fetchPokemons } from "@/services/pokemons-service";
+import { StyleSheet, Text, View } from "react-native";
+const test = await fetchPokemons();
 
+console.log(test);
 export default function Index() {
   return (
     <View style={styles.container}>
