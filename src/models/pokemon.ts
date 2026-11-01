@@ -2,6 +2,7 @@ export type Pokemon = {
   name: string;
   number: number;
   sprite: string;
+  animatedSprite: string;
   type1: string;
   type2?: string;
   isFavorite: boolean;
