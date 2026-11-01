@@ -1,15 +1,15 @@
-import { Pokemon } from "@/models/pokemon";
+import { PokemonDto } from "@/dto/pokemon-dto";
+import { convertPokemonData } from "@/mappers/pokemon-mapper";
 
-export async function fetchPokemons() {
-  const PokeApi = process.env.EXPO_PUBLIC_POKEMON_API;
-  console.log(PokeApi);
+export async function fetchPokemons(id: number) {
+  const pokeApiUrl = process.env.EXPO_PUBLIC_POKEMON_API;
 
-  if (!PokeApi) {
+  if (!pokeApiUrl) {
     throw new Error("L'API n'est pas valide");
   }
-  const response = await fetch(PokeApi);
+  const response = await fetch(`${pokeApiUrl}/${id}`);
 
   if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
-
-  return response.json() as Promise<Pokemon[]>;
+  const data: PokemonDto = await response.json();
+  return convertPokemonData(data);
 }
