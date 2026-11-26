@@ -1,8 +1,21 @@
-import { Pokemon } from "@/models/pokemon";
-import { fetchPokemons } from "@/services/pokemons-service";
+import { Pokemon } from "@/models/pokemon-api";
+import { fetchPokemons } from "@/services/pokeapi-service";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Image } from "react-native";
+import { Image, Button } from "react-native";
+import { addCapturedPokemon } from "@/services/pokemon-db-service";
+import { auth } from "@/services/firebase";
+import { signInAnonymously } from "firebase/auth";
+
+async function testAdd() {
+  try {
+    const { user } = await signInAnonymously(auth);
+    await addCapturedPokemon(user.uid, 717, "YVELATL");
+    console.log("Ajouté pour", user.uid);
+  } catch (error) {
+    console.error("Erreur :", error);
+  }
+}
 
 export default function Index() {
   const [pokemons, setPokemons] = useState<Pokemon>();
@@ -21,6 +34,7 @@ export default function Index() {
         style={styles.sprite}
         source={{ uri: pokemons?.animatedSprite ?? pokemons?.sprite }}
       />
+      <Button title="Capturer" onPress={testAdd} />
     </View>
   );
 }

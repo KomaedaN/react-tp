@@ -1,5 +1,5 @@
 import { PokemonDto } from "@/dto/pokemon-dto";
-import { Pokemon } from "@/models/pokemon";
+import { Pokemon } from "@/models/pokemon-api";
 const SPRITES_URL =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
 
