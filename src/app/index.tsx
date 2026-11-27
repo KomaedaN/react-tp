@@ -1,8 +1,9 @@
 import { Pokemon } from "@/models/pokemon-api";
-import { fetchPokemons } from "@/services/pokeapi-service";
+import { fetchPokemon } from "@/services/pokeapi-service";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Image, Button } from "react-native";
+import { Link } from "expo-router";
 import { addCapturedPokemon } from "@/services/pokemon-db-service";
 import { auth } from "@/services/firebase";
 import { signInAnonymously } from "firebase/auth";
@@ -20,7 +21,7 @@ async function testAdd() {
 export default function Index() {
   const [pokemons, setPokemons] = useState<Pokemon>();
   useEffect(() => {
-    fetchPokemons(717)
+    fetchPokemon(717)
       .then((data) => {
         setPokemons(data);
       })
@@ -35,6 +36,7 @@ export default function Index() {
         source={{ uri: pokemons?.animatedSprite ?? pokemons?.sprite }}
       />
       <Button title="Capturer" onPress={testAdd} />
+      <Link href="/pokedex">Pokedex</Link>
     </View>
   );
 }

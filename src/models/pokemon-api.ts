@@ -2,7 +2,7 @@ export type Pokemon = {
   name: string;
   number: number;
   sprite: string;
-  animatedSprite: string;
+  animatedSprite?: string;
   type1: string;
   type2?: string;
   isFavorite: boolean;
@@ -35,3 +35,25 @@ export function matchesPokemonFilter(
   const matchesFavorite = !filters.onlyFavorites || pokemon.isFavorite;
   return matchesQuery && matchesType && matchesFavorite;
 }
+
+export type NamedApiResourceDto = {
+  name: string;
+  url: string;
+};
+
+export type PokemonTypeDto = {
+  type: NamedApiResourceDto;
+};
+
+export type PokemonDto = {
+  id: number;
+  name: string;
+  types: PokemonTypeDto[];
+};
+
+export type PokemonListDto = {
+  results: {
+    name: string;
+    url: string;
+  }[];
+};
